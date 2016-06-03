@@ -2,6 +2,7 @@
 TODO:
 - Add option to disable payout for AFK players (store last moved time)
 - Add option for daily/weekly login bonuses
+- Rework the math so the earned money amounts aren't insane
 - Utilize player.net.connection.GetSecondsConnected()
 */
 

@@ -1,5 +1,7 @@
 using System.Linq;
 
+using UnityEngine;
+
 namespace Oxide.Plugins
 {
     [Info("FilterExt", "Wulf/lukespragg", 0.1)]
@@ -68,12 +70,14 @@ namespace Oxide.Plugins
             #endif
             #if THEFOREST
             Game.TheForest.TheForestExtension.Filter = filter.ToArray();
-            #endif
-            #if UNTURNED
+#endif
+#if UNTURNED
             Game.Unturned.UnturnedExtension.Filter = filter.ToArray();
-            #endif
+#endif
 
             #endregion
         }
+
+        private void OnServerSave() => PrintWarning("Server saved!");
     }
 }

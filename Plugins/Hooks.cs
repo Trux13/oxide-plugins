@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
-
-using UnityEngine;
+using Oxide.Core.Libraries.Covalence;
 
 namespace Oxide.Plugins
 {
-    [Info("Hooks", "Oxide Team", 0.1)]
-    [Description("Tests all of the available Oxide hooks.")]
+    [Info("Hooks", "Oxide Team", "0.1.0")]
+    [Description("Tests all of the available Oxide hooks")]
 
     class Hooks : CovalencePlugin
     {
@@ -28,7 +27,7 @@ namespace Oxide.Plugins
 
         #endregion
 
-        #region Plugin Hooks
+        #region Plugin Hooks (universal)
 
         private void Init()
         {
@@ -48,7 +47,7 @@ namespace Oxide.Plugins
 
         #endregion
 
-        #region Server Hooks (generic)
+        #region Server Hooks (universal)
 
         private void OnServerInitialized() => HookCalled("OnServerInitialized");
 
@@ -58,16 +57,107 @@ namespace Oxide.Plugins
 
         #endregion
 
-        private void OnExperienceGained()
+        #region Player Hooks (covalence)
+
+        private object CanUserLogin(string name, string id)
         {
-            PrintWarning("RECEIVED EXPERIENCE!");
+            HookCalled("CanUserLogin");
+            PrintWarning($"{name} ({id}) is attempting to login");
+            return null;
         }
+
+        private void OnUserApproved(string name, string id)
+        {
+            HookCalled("OnUserApproved");
+            PrintWarning($"{name} ({id}) has been approved");
+        }
+
+        private object OnUserChat(IPlayer player, string message)
+        {
+            HookCalled("OnUserChat");
+            PrintWarning($"{player.Name} said: {message}");
+            return null;
+        }
+
+        private void OnUserConnected(IPlayer player)
+        {
+            HookCalled("OnUserConnected");
+            PrintWarning($"{player.Name} ({player.Id}) connected from {player.ConnectedPlayer.Address}");
+            if (player.ConnectedPlayer.IsAdmin()) PrintWarning($"{player.Name} is admin");
+        }
+
+        private void OnUserDisconnected(IPlayer player, string reason)
+        {
+            HookCalled("OnUserDisconnected");
+            PrintWarning($"{player.Name} ({player.Id}) disconnected for: {reason ?? "Unknown"}");
+        }
+
+        private void OnUserInit(IPlayer player)
+        {
+            HookCalled("OnUserInit");
+            PrintWarning($"{player.Name ?? "Unnamed"} initialized");
+        }
+
+        private void OnUserSpawn(IPlayer player)
+        {
+            HookCalled("OnUserSpawn");
+            PrintWarning($"{player.Name} is spawning now");
+        }
+
+        private void OnUserSpawned(IPlayer player)
+        {
+            HookCalled("OnUserSpawned");
+            PrintWarning($"{player.Name} spawned at {player.ConnectedPlayer.Character.Position()}");
+        }
+
+        private void OnUserRespawn(IPlayer player)
+        {
+            HookCalled("OnUserRespawn");
+            PrintWarning($"{player.Name} is respawning now");
+        }
+
+        private void OnUserRespawned(IPlayer player)
+        {
+            HookCalled("OnUserRespawned");
+            PrintWarning($"{player.Name} respawned at {player.ConnectedPlayer.Character.Position()}");
+        }
+
+        #endregion
+
+#if HIDEHOLDOUT
+
+        #region Server Hooks
+
+        private void OnServerCommand(string command)
+        {
+            HookCalled("OnServerCommand");
+        }
+
+        #endregion
+
+        #region Player Hooks
+
+        private void OnChatCommand(PlayerInfos player, string command)
+        {
+            HookCalled("OnChatCommand");
+        }
+
+        private void OnPlayerDeath(PlayerInfos player)
+        {
+            PrintWarning("OnPlayerDeath");
+        }
+
+        #endregion
+
+#endif
 
 #if HURTWORLD
 
-        private object OnPlayerChat(PlayerSession session)
+        #region Player Hooks
+
+        private object OnChatCommand(PlayerSession session, string command)
         {
-            HookCalled("OnPlayerChat");
+            HookCalled("OnChatCommand");
             return null;
         }
 
@@ -76,43 +166,70 @@ namespace Oxide.Plugins
             HookCalled("OnPlayerDeath");
         }
 
-        private void OnPlayerRespawn(PlayerSession session)
-        {
-            HookCalled("OnPlayerRespawn");
-        }
+        #endregion
 
-        private bool CanExitVehicle(PlayerSession session, CharacterMotorSimple passenger, VehiclePassenger vehicle)
-        {
-            HookCalled("CanExitVehicle");
-            return true;
-        }
+        #region Vehicle Hooks
 
-        private object CanUseVehicle(uLink.NetworkPlayer player, CharacterMotorSimple passenger, VehicleUsable vehicle)
+        private object CanEnterVehicle(PlayerSession session, CharacterMotorSimple passenger)
         {
-            HookCalled("CanUseVehicle");
+            HookCalled("CanEnterVehicle");
             return null;
         }
 
-        private void OnEnterVehicle(PlayerSession session, CharacterMotorSimple passenger, VehiclePassenger vehicle)
+        private object CanExitVehicle(PlayerSession session, CharacterMotorSimple passenger)
+        {
+            HookCalled("CanExitVehicle");
+            return null;
+        }
+
+        private void OnEnterVehicle(PlayerSession session, CharacterMotorSimple passenger)
         {
             HookCalled("OnEnterVehicle");
         }
 
-        private void OnExitVehicle(PlayerSession session, CharacterMotorSimple passenger, VehiclePassenger vehicle)
+        private void OnExitVehicle(PlayerSession session, CharacterMotorSimple passenger)
         {
             HookCalled("OnExitVehicle");
         }
 
-        private void OnSetPassenger(PlayerSession session, CharacterMotorSimple passenger, VehiclePassenger vehicle)
+        #endregion
+
+#endif
+
+#if REIGNOFKINGS
+
+        #region Entity Hooks
+
+        private void OnEntityHealthChange(CodeHatch.Networking.Events.Entities.EntityDamageEvent e)
         {
-            HookCalled("OnSetPassenger");
+            HookCalled("OnEntityHealthChange");
         }
 
-        /*private object OnVehicleInput(VehiclePassenger vehicle, ref InputControls controls)
+        private void OnEntityDeath(CodeHatch.Networking.Events.Entities.EntityDeathEvent e)
         {
-            HookCalled("OnVehicleInput");
-            return null;
-        }*/
+            HookCalled("OnEntityDeath");
+        }
+
+        #endregion
+
+        #region Structure Hooks
+
+        private void OnCubePlacement(CodeHatch.Blocks.Networking.Events.CubePlaceEvent evt)
+        {
+            HookCalled("OnCubePlacement");
+        }
+
+        private void OnCubeTakeDamage(CodeHatch.Blocks.Networking.Events.CubeDamageEvent evt)
+        {
+            HookCalled("OnCubeTakeDamage");
+        }
+
+        private void OnCubeDestroyed(CodeHatch.Blocks.Networking.Events.CubeDestroyEvent evt)
+        {
+            HookCalled("OnCubeDestroyed");
+        }
+
+        #endregion
 
 #endif
 
@@ -124,68 +241,44 @@ namespace Oxide.Plugins
 
         private void OnTerrainInitialized() => HookCalled("OnTerrainInitialized");
 
-        private void OnRunCommand(ConsoleSystem.Arg arg)
+        private object OnRunCommand(ConsoleSystem.Arg arg)
         {
             HookCalled("OnRunCommand");
             // TODO: Print command messages
+            return null;
         }
 
         #endregion
 
         #region Player Hooks
 
-        private void OnUserApprove(Network.Connection connection)
+        private bool CanBypassQueue(Network.Connection connection)
         {
-            HookCalled("OnUserApprove");
+            HookCalled("CanBypassQueue");
+            return true;
         }
 
-        private void CanClientLogin(Network.Connection connection)
+        private object OnServerCommand(ConsoleSystem.Arg arg)
         {
-            HookCalled("CanClientLogin");
+            HookCalled("OnServerCommand");
+            return null;
         }
 
-        private void OnPlayerConnected(Network.Message packet)
+        private bool CanEquipItem(PlayerInventory inventory, Item item)
         {
-            HookCalled("OnPlayerConnected");
-            Puts($"{packet.connection.username} ({packet.connection.userid}) connected!");
+            HookCalled("CanEquipItem");
+            return true;
         }
 
-        private void OnPlayerDisconnected(BasePlayer player, string reason)
+        private bool CanWearItem(PlayerInventory inventory, Item item)
         {
-            HookCalled("OnPlayerDisconnected");
-            Puts($"{player.displayName} ({player.userID}) disconnected!");
-        }
-
-        private void OnPlayerInit(BasePlayer player)
-        {
-            HookCalled("OnPlayerInit");
-            // TODO: Force admin to spawn/wakeup
+            HookCalled("CanWearItem");
+            return true;
         }
 
         private void OnFindSpawnPoint()
         {
             HookCalled("OnFindSpawnPoint");
-            // TODO: Print spawn point
-        }
-
-        private void OnPlayerRespawned(BasePlayer player)
-        {
-            HookCalled("OnPlayerRespawned");
-            // TODO: Print respawn location
-            // TODO: Print start metabolism values
-            // TODO: Give admin items for testing
-        }
-
-        private void OnPlayerChat(ConsoleSystem.Arg arg)
-        {
-            HookCalled("OnPlayerChat");
-        }
-
-        private void OnPlayerLoot(PlayerLoot inventory, BaseEntity entity)
-        //private void OnPlayerLoot(PlayerLoot inventory, BasePlayer target)
-        //private void OnPlayerLoot(PlayerLoot inventory, Item item)
-        {
-            HookCalled("OnPlayerLoot");
         }
 
         private void OnPlayerInput(BasePlayer player, InputState input)
@@ -203,7 +296,7 @@ namespace Oxide.Plugins
 
         #region Entity Hooks
 
-        private void OnAirdrop(CargoPlane plane, Vector3 location)
+        private void OnAirdrop(CargoPlane plane, UnityEngine.Vector3 location)
         {
             HookCalled("OnAirdrop");
         }
@@ -213,7 +306,7 @@ namespace Oxide.Plugins
             HookCalled("OnEntityTakeDamage");
         }
 
-        private void OnEntityBuilt(Planner planner, GameObject go)
+        private void OnEntityBuilt(Planner planner, UnityEngine.GameObject go)
         {
             HookCalled("OnEntityBuilt");
         }
@@ -315,12 +408,12 @@ namespace Oxide.Plugins
             HookCalled("OnTrapArm");
         }
 
-        private void OnTrapSnapped(BaseTrapTrigger trap, GameObject go)
+        private void OnTrapSnapped(BaseTrapTrigger trap, UnityEngine.GameObject go)
         {
             HookCalled("OnTrapSnapped");
         }
 
-        private void OnTrapTrigger(BaseTrap trap, GameObject go)
+        private void OnTrapTrigger(BaseTrap trap, UnityEngine.GameObject go)
         {
             HookCalled("OnTrapTrigger");
         }
@@ -396,12 +489,12 @@ namespace Oxide.Plugins
             HookCalled("OnDoorOpened");
         }
 
-        private void OnCupboardAuthorize(BuildingPrivlidge priviledge, BasePlayer player)
+        private void OnCupboardAuthorize(BuildingPrivlidge privilege, BasePlayer player)
         {
             HookCalled("OnCupboardAuthorize");
         }
 
-        private void OnCupboardDeauthorize(BuildingPrivlidge priviledge, BasePlayer player)
+        private void OnCupboardDeauthorize(BuildingPrivlidge privilege, BasePlayer player)
         {
             HookCalled("OnCupboardDeauthorize");
         }
@@ -421,12 +514,12 @@ namespace Oxide.Plugins
             HookCalled("OnTrapDisarm");
         }
 
-        private void OnTrapSnapped(BearTrap trap, GameObject go)
+        private void OnTrapSnapped(BearTrap trap, UnityEngine.GameObject go)
         {
             HookCalled("OnTrapSnapped");
         }
 
-        private void OnTrapTrigger(BearTrap trap, GameObject go)
+        private void OnTrapTrigger(BearTrap trap, UnityEngine.GameObject go)
         {
             HookCalled("OnTrapTrigger");
         }
@@ -440,11 +533,63 @@ namespace Oxide.Plugins
 
 #endif
 
+#if SEVENDAYS
+
+        #region Server Hooks
+
+        private void OnRunCommand(ClientInfo client, string[] args)
+        {
+            HookCalled("OnRunCommand");
+        }
+
+        #endregion
+
+        #region Player Hooks
+
+        private void OnExperienceGained()
+        {
+            HookCalled("OnExperienceGained");
+        }
+
+        #endregion
+
+        #region Entity Hooks
+
+        private void OnAirdrop(UnityEngine.Vector3 location)
+        {
+            HookCalled("OnAirdrop");
+        }
+
+        private void OnEntitySpawned(Entity entity)
+        {
+            HookCalled("OnEntitySpawned");
+        }
+
+        private void OnEntityTakeDamage(EntityAlive entity, DamageSource source)
+        {
+            HookCalled("OnEntityTakeDamage");
+        }
+
+        private void OnEntityDeath(Entity entity, DamageResponse response)
+        {
+            HookCalled("OnEntityDeath");
+        }
+
+        #endregion
+
+#endif
+
 #if UNTURNED
+
+        #region Server Hooks
+
         private void OnRunCommand(Steamworks.CSteamID steamId, string command, string arg)
         {
             HookCalled("OnRunCommand");
         }
+
+        #endregion
+
 #endif
     }
 }

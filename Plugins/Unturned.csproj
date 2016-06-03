@@ -11,10 +11,6 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <OutputPath>bin\Unturned\</OutputPath>
-    <DefineConstants>UNTURNED</DefineConstants>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.Unturned\Dependencies\Assembly-CSharp.dll</HintPath>
@@ -26,16 +22,25 @@
       <HintPath>..\..\Oxide\Oxide.Core\Dependencies\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Core">
-      <HintPath>..\..\Oxide\Bundles\Unturned\Unturned_Data\Managed\Oxide.Core.dll</HintPath>
+      <HintPath>..\..\Oxide\Oxide.Core\bin\Release\Oxide.Core.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Ext.CSharp">
-      <HintPath>..\..\Oxide\Bundles\Unturned\Unturned_Data\Managed\Oxide.Ext.CSharp.dll</HintPath>
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.CSharp\bin\Release\Oxide.Ext.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Ext.MySql">
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.MySQL\bin\Release\Oxide.Ext.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Ext.SQLite">
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.SQLite\bin\Release\Oxide.Ext.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Ext.Unity">
-      <HintPath>..\..\Oxide\Bundles\Unturned\Unturned_Data\Managed\Oxide.Ext.Unity.dll</HintPath>
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.Unity\bin\Release\Oxide.Ext.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Game.Unturned">
-      <HintPath>..\..\Oxide\Bundles\Unturned\Unturned_Data\Managed\Oxide.Game.Unturned.dll</HintPath>
+      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.Unturned\bin\Release\Oxide.Game.Unturned.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\Oxide\Oxide.Core\Dependencies\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,9 +50,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CountryBlock.cs" />
-    <Compile Include="FilterExt.cs" />
-    <Compile Include="GeoIP.cs" />
     <Compile Include="Hooks.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -12,7 +12,8 @@
 
         void LoadDefaultMessages()
         {
-            var messages = new Dictionary<string, string>            {                {"PlayerJoined", "{name} joined the survivors"},                {"PlayerQuit", "{name} abandoned the survivors"}            };            lang.RegisterMessages(messages, this);
+            lang.RegisterMessages(new Dictionary<string, string>
+            {                {"PlayerJoined", "{name} joined the survivors"},                {"PlayerQuit", "{name} abandoned the survivors"}            }, this);
         }
 
         #endregion
@@ -21,18 +22,19 @@
 
         void Loaded()
         {
-#if !HURTWORLD && !REIGNOFKINGS && !RUST
+            #if !HURTWORLD && !REIGNOFKINGS && !RUST && !RUSTLEGACY
             throw new NotSupportedException("This plugin does not support this game");
-#endif
+            #endif
 
-            LoadDefaultMessages();        }
+            LoadDefaultMessages();
+        }
 
         #endregion
 
         #region Broadcast Messages
 
         #region Hurtworld
-#if HURTWORLD
+        #if HURTWORLD
         void OnPlayerConnected(PlayerSession session)
         {
             server.Broadcast(GetMessage("PlayerJoined", session.SteamId.ToString()).Replace("{name}", session.Name));
@@ -42,11 +44,11 @@
             server.Broadcast(GetMessage("PlayerQuit", session.SteamId.ToString()).Replace("{name}", session.Name));
         }
         bool OnDisconnectionNotice() => true;
-#endif
+        #endif
         #endregion
 
         #region Reign of Kings
-#if REIGNOFKINGS
+        #if REIGNOFKINGS
         void OnPlayerConnected(CodeHatch.Engine.Networking.Player player)
         {
             server.Broadcast(GetMessage("PlayerJoined", player.Id.ToString()).Replace("{name}", player.Name));
@@ -56,11 +58,11 @@
         {
             server.Broadcast(GetMessage("PlayerQuit", player.Id.ToString()).Replace("{name}", player.Name));
         }
-#endif
+        #endif
         #endregion
 
         #region Rust
-#if RUST
+        #if RUST
         void OnPlayerConnected(Network.Message packet)
         {
             var connection = packet.connection;
@@ -71,11 +73,11 @@
         {
             server.Broadcast(GetMessage("PlayerQuit", player.UserIDString).Replace("{name}", player.displayName));
         }
-#endif
+        #endif
         #endregion
 
         #region Rust Legacy
-#if RUSTLEGACY
+        #if RUSTLEGACY
         void OnPlayerConnected(NetUser netuser)
         {
             server.Broadcast(GetMessage("PlayerJoined", netuser.userID.ToString()).Replace("{name}", netuser.displayName));
@@ -86,27 +88,29 @@
             var netuser = player.GetLocalData<NetUser>();
             server.Broadcast(GetMessage("PlayerQuit", netuser.userID.ToString()).Replace("{name}", netuser.displayName));
         }
-#endif
+        #endif
         #endregion
 
         #region The Forest
-#if THEFOREST
+        #if THEFOREST
         void OnPlayerConnected(BoltConnection connection)
         {
             if (connection == null && CoopLobby.Instance.MemberCount < 1) return;
-            var steamId = forest.IdFromConnection(connection);
+            /*var steamId = forest.IdFromConnection(connection);
             var name = forest.NameFromId(steamId);
-            server.Broadcast(GetMessage("PlayerJoined", steamId).Replace("{name}", name));
+            server.Broadcast(GetMessage("PlayerJoined", steamId).Replace("{name}", name));*/
+
+            Puts(TheForest.Utils.SaveSlotUtils.GetLocalSlotPath());
+            Puts(TheForest.Utils.SaveSlotUtils.GetCloudSlotPath());
         }
 
         void OnPlayerDisconnected(BoltConnection connection)
         {
             if (connection == null && CoopLobby.Instance.MemberCount < 1) return;
-            var steamId = forest.IdFromConnection(connection);
+            /*var steamId = forest.IdFromConnection(connection);
             var name = forest.NameFromId(steamId);
-            server.Broadcast(GetMessage("PlayerQuit", steamId).Replace("{name}", name));
-        }
-#endif
+            server.Broadcast(GetMessage("PlayerQuit", steamId).Replace("{name}", name));*/        }
+        #endif
         #endregion
 
         #endregion

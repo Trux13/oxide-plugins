@@ -23,19 +23,25 @@
       <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.Hurtworld\Dependencies\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Oxide\Bundles\Rust\RustDedicated_Data\Managed\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\Oxide\Oxide.Core\Dependencies\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Core">
-      <HintPath>..\..\Oxide\Bundles\Hurtworld\hurtworld_Data\Managed\Oxide.Core.dll</HintPath>
+      <HintPath>..\..\Oxide\Oxide.Core\bin\Release\Oxide.Core.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Ext.CSharp">
-      <HintPath>..\..\Oxide\Bundles\Hurtworld\hurtworld_Data\Managed\Oxide.Ext.CSharp.dll</HintPath>
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.CSharp\bin\Release\Oxide.Ext.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Ext.MySql">
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.MySQL\bin\Release\Oxide.Ext.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Ext.SQLite">
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.SQLite\bin\Release\Oxide.Ext.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Ext.Unity">
-      <HintPath>..\..\Oxide\Bundles\Hurtworld\hurtworld_Data\Managed\Oxide.Ext.Unity.dll</HintPath>
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.Unity\bin\Release\Oxide.Ext.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Game.Hurtworld">
-      <HintPath>..\..\Oxide\Bundles\Hurtworld\hurtworld_Data\Managed\Oxide.Game.Hurtworld.dll</HintPath>
+      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.Hurtworld\bin\Release\Oxide.Game.Hurtworld.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,32 +57,30 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AFK.cs" />
-    <Compile Include="Announcer.cs" />
+    <Compile Include="AntiAds.cs" />
     <Compile Include="AntiGriefJail.cs" />
+    <Compile Include="AutoDoors.cs" />
     <Compile Include="ChangeName.cs" />
+    <Compile Include="ChatFilter.cs" />
     <Compile Include="ClearInventory.cs" />
-    <Compile Include="CountryBlock.cs" />
     <Compile Include="DeathMessages.cs" />
     <Compile Include="Hooks.cs" />
     <Compile Include="include\Ext.Example.cs" />
-    <Compile Include="FilterExt.cs" />
     <Compile Include="Help.cs" />
+    <Compile Include="Infamy.cs" />
     <Compile Include="Kits.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="DynPlayers.cs" />
     <Compile Include="MOTD.cs" />
-    <Compile Include="NameFilter.cs" />
-    <Compile Include="NoSlack.cs" />
+    <Compile Include="NameManager.cs" />
     <Compile Include="NoSuicide.cs" />
     <Compile Include="Password.cs" />
-    <Compile Include="Ping.cs" />
     <Compile Include="PlayersList.cs" />
     <Compile Include="PrivateMessage.cs" />
     <Compile Include="Reserved.cs" />
     <Compile Include="ServerSay.cs" />
     <Compile Include="Slack.cs" />
-    <Compile Include="Teleporter.cs" />
+    <Compile Include="StartMachine.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

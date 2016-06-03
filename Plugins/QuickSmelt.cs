@@ -1,19 +1,9 @@
-﻿/*
-TODO:
-- Fix 'Creating item with less than 1 amount! (Charcoal)'
-- Fix 'Failed to call hook 'OnConsumeFuel' on plugin 'QuickSmelt v1.1.0' (NullReferenceException: Object reference not set to an instance of an object)'
-  at Oxide.Plugins.QuickSmelt.OnConsumeFuel (.BaseOven oven, .Item fuel, .ItemModBurnable burnable) [0x00000] in <filename unknown>:0
-  at Oxide.Plugins.QuickSmelt.DirectCallHook (System.String name, System.Object&ret, System.Object[] args) [0x00000] in <filename unknown>:0
-  at Oxide.Plugins.CSharpPlugin.InvokeMethod (System.Reflection.MethodInfo method, System.Object[] args) [0x00000] in <filename unknown>:0
-- Check why it isn't increasing the speed
-*/
-
-using System;
+﻿using System;
 using Random = UnityEngine.Random;
 
 namespace Oxide.Plugins
 {
-    [Info("QuickSmelt", "Wulf/lukespragg", "1.1.1", ResourceId = 1067)]
+    [Info("QuickSmelt", "Wulf/lukespragg", "1.2.0", ResourceId = 1067)]
     [Description("Increases the speed of the furnace smelting.")]
 
     class QuickSmelt : RustPlugin
@@ -27,6 +17,7 @@ namespace Oxide.Plugins
         float CharcoalProductionModifier => GetConfig("CharcoalProductionModifier", 1f);
         bool DontOvercookMeat => GetConfig("DontOvercookMeat", true);
         float ProductionModifier => GetConfig("ProductionModifier", 1f);
+        bool UsePermissions => GetConfig("UsePermission", false);
 
         protected override void LoadDefaultConfig()
         {
@@ -36,7 +27,22 @@ namespace Oxide.Plugins
             Config["CharcoalProductionModifier"] = CharcoalProductionModifier;
             Config["DontOvercookMeat"] = DontOvercookMeat;
             Config["ProductionModifier"] = ProductionModifier;
+            Config["UsePermissions"] = UsePermissions;
             SaveConfig();
+        }
+
+        #endregion
+
+        #region Initialization
+
+        void Loaded()
+        {
+            #if !RUST
+            throw new NotSupportedException("This plugin does not support this game");
+            #endif
+
+            LoadDefaultConfig();
+            permission.RegisterPermission("quicksmelt.allowed", this);
         }
 
         #endregion
@@ -44,9 +50,9 @@ namespace Oxide.Plugins
         void OnConsumeFuel(BaseOven oven, Item fuel, ItemModBurnable burnable)
         {
             if (oven == null) return;
+            if (UsePermissions && !HasPermission(oven.OwnerID.ToString(), "quicksmelt.allowed")) return;
 
             var byproductChance = burnable.byproductChance * CharcoalChanceModifier;
-
             if (oven.allowByproductCreation && burnable.byproductItem != null && Random.Range(0.0f, 1f) <= byproductChance)
             {
                 var obj = ItemManager.Create(burnable.byproductItem, (int)Math.Round(burnable.byproductAmount * CharcoalProductionModifier));
@@ -111,6 +117,8 @@ namespace Oxide.Plugins
             if (Config[name] == null) return defaultValue;
             return (T)Convert.ChangeType(Config[name], typeof(T));
         }
+
+        bool HasPermission(string userId, string perm) => permission.UserHasPermission(userId, perm);
 
         #endregion
     }

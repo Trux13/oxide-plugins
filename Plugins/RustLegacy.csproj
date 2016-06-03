@@ -26,16 +26,25 @@
       <HintPath>..\..\Oxide\Oxide.Core\Dependencies\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Core">
-      <HintPath>..\..\Oxide\Bundles\RustLegacy\rust_server_Data\Managed\Oxide.Core.dll</HintPath>
+      <HintPath>..\..\Oxide\Oxide.Core\bin\Release\Oxide.Core.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Ext.CSharp">
-      <HintPath>..\..\Oxide\Bundles\RustLegacy\rust_server_Data\Managed\Oxide.Ext.CSharp.dll</HintPath>
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.CSharp\bin\Release\Oxide.Ext.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Ext.MySql">
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.MySQL\bin\Release\Oxide.Ext.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Oxide.Ext.SQLite">
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.SQLite\bin\Release\Oxide.Ext.SQLite.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Ext.Unity">
-      <HintPath>..\..\Oxide\Bundles\RustLegacy\rust_server_Data\Managed\Oxide.Ext.Unity.dll</HintPath>
+      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.Unity\bin\Release\Oxide.Ext.Unity.dll</HintPath>
     </Reference>
     <Reference Include="Oxide.Game.RustLegacy">
-      <HintPath>..\..\Oxide\Bundles\RustLegacy\rust_server_Data\Managed\Oxide.Game.RustLegacy.dll</HintPath>
+      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.RustLegacy\bin\Release\Oxide.Game.RustLegacy.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net">
+      <HintPath>..\..\Oxide\Oxide.Core\Dependencies\protobuf-net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,11 +57,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Announcer.cs" />
-    <Compile Include="CountryBlock.cs" />
-    <Compile Include="GeoIP.cs" />
+    <Compile Include="AntiDecay.cs" />
+    <Compile Include="AntiGod.cs" />
+    <Compile Include="MyInfo.cs" />
+    <Compile Include="PopToAll.cs" />
+    <Compile Include="Reserved.cs" />
     <Compile Include="Spiritwalk.cs" />
-    <Compile Include="TimerTest.cs" />
+    <Compile Include="VoteDayNight.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

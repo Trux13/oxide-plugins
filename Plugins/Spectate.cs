@@ -1,7 +1,7 @@
 ﻿/*
 TODO:
-- Fix players being teleported to their spectated player?
-- Fix players dying from fall after unspectating?
+- Fix players being teleported to their spectated player
+- Fix players dying from fall after unspectating
 - Block all damage while spectating
 */
 

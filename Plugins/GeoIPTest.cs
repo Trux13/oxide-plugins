@@ -2,7 +2,7 @@ using Oxide.Core.Plugins;
 
 namespace Oxide.Plugins
 {
-    [Info("GeoIPTest", "Wulf/lukespragg", 0.1)]
+    [Info("GeoIPTest", "Wulf/lukespragg", "0.1.2.3")]
     [Description("GeoIP test plugin.")]
 
     class GeoIPTest : RustPlugin

@@ -4,21 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{16C99A61-A09B-41E4-B07A-EDEE3FEB3D19}</ProjectGuid>
+    <ProjectGuid>{28D59FFC-8D7E-47B0-8FF5-03BB8EA5067D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>ReignOfKings</RootNamespace>
-    <AssemblyName>ReignOfKings</AssemblyName>
+    <RootNamespace>MedievalEngineers</RootNamespace>
+    <AssemblyName>MedievalEngineers</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <OutputPath>bin\ReignOfKings\</OutputPath>
-    <DefineConstants>REIGNOFKINGS</DefineConstants>
+    <OutputPath>bin\MedievalEngineers\</OutputPath>
+    <DefineConstants>MEDIEVALENGINEERS</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\Dependencies\Assembly-CSharp.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Oxide\Oxide.Core\Dependencies\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -34,35 +31,36 @@
     <Reference Include="Oxide.Ext.SQLite">
       <HintPath>..\..\Oxide\Extensions\Oxide.Ext.SQLite\bin\Release\Oxide.Ext.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="Oxide.Ext.Unity">
-      <HintPath>..\..\Oxide\Extensions\Oxide.Ext.Unity\bin\Release\Oxide.Ext.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="Oxide.Game.ReignOfKings">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\bin\Release\Oxide.Game.ReignOfKings.dll</HintPath>
+    <Reference Include="Oxide.Game.MedievalEngineers">
+      <HintPath>..\..\Oxide\Games\Other\Oxide.Game.MedievalEngineers\bin\Release\Oxide.Game.MedievalEngineers.dll</HintPath>
     </Reference>
     <Reference Include="protobuf-net">
       <HintPath>..\..\Oxide\Oxide.Core\Dependencies\protobuf-net.dll</HintPath>
     </Reference>
+    <Reference Include="Sandbox.Common">
+      <HintPath>..\..\Oxide\Games\Other\Oxide.Game.SpaceEngineers\Dependencies\Sandbox.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Sandbox.Game">
+      <HintPath>..\..\Oxide\Games\Other\Oxide.Game.SpaceEngineers\Dependencies\Sandbox.Game.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
-    <Reference Include="uLink">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\Dependencies\uLink.dll</HintPath>
+    <Reference Include="VRage">
+      <HintPath>..\..\Oxide\Games\Other\Oxide.Game.SpaceEngineers\Dependencies\VRage.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\Dependencies\UnityEngine.dll</HintPath>
+    <Reference Include="VRage.Dedicated">
+      <HintPath>..\..\Oxide\Games\Other\Oxide.Game.SpaceEngineers\Dependencies\VRage.Dedicated.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Library">
+      <HintPath>..\..\Oxide\Games\Other\Oxide.Game.SpaceEngineers\Dependencies\VRage.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="VRage.Math">
+      <HintPath>..\..\Oxide\Games\Other\Oxide.Game.SpaceEngineers\Dependencies\VRage.Math.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AFK.cs" />
-    <Compile Include="Announcer.cs" />
-    <Compile Include="CountryBlock.cs" />
-    <Compile Include="DuelsManager.cs" />
-    <Compile Include="FilterExt.cs" />
     <Compile Include="Hooks.cs" />
-    <Compile Include="Ping.cs" />
-    <Compile Include="Reserved.cs" />
-    <Compile Include="Whitelist.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

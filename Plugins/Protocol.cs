@@ -2,17 +2,15 @@
 
 namespace Oxide.Plugins
 {
-    [Info("Protocol", "Wulf/lukespragg", 0.1, ResourceId = 0)]
+    [Info("Protocol", "Wulf/lukespragg", 0.1)]
     [Description("Allows any client, regardless of protocol, to connect.")]
 
     class Protocol : RustPlugin
     {
-        void OnClientAuth(Network.Message pack)
+        void OnClientAuth(Network.Connection connection)
         {
-            if (pack.connection == null) return;
-
-            Puts($"{pack.connection.userid} joined with protocol {pack.connection.protocol}");
-            pack.connection.protocol = Rust.Protocol.network;
+            Puts($"{connection.userid} joined with protocol {connection.protocol}");
+            connection.protocol = Rust.Protocol.network; // Not working?
         }
     }
 }

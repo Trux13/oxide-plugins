@@ -4,20 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{16C99A61-A09B-41E4-B07A-EDEE3FEB3D19}</ProjectGuid>
+    <ProjectGuid>{D2BE63FB-71E0-462A-89EB-1AFFA6D3C396}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>ReignOfKings</RootNamespace>
-    <AssemblyName>ReignOfKings</AssemblyName>
+    <RootNamespace>HideHoldOut</RootNamespace>
+    <AssemblyName>HideHoldOut</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
-    <OutputPath>bin\ReignOfKings\</OutputPath>
-    <DefineConstants>REIGNOFKINGS</DefineConstants>
+    <OutputPath>bin\HideHoldOut\</OutputPath>
+    <DefineConstants>HIDEHOLDOUT</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\Dependencies\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.HideHoldOut\Dependencies\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\Oxide\Oxide.Core\Dependencies\Newtonsoft.Json.dll</HintPath>
@@ -37,32 +37,21 @@
     <Reference Include="Oxide.Ext.Unity">
       <HintPath>..\..\Oxide\Extensions\Oxide.Ext.Unity\bin\Release\Oxide.Ext.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="Oxide.Game.ReignOfKings">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\bin\Release\Oxide.Game.ReignOfKings.dll</HintPath>
-    </Reference>
-    <Reference Include="protobuf-net">
-      <HintPath>..\..\Oxide\Oxide.Core\Dependencies\protobuf-net.dll</HintPath>
+    <Reference Include="Oxide.Game.HideHoldOut">
+      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.HideHoldOut\bin\Release\Oxide.Game.HideHoldOut.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="uLink">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\Dependencies\uLink.dll</HintPath>
+      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.HideHoldOut\Dependencies\uLink.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.ReignOfKings\Dependencies\UnityEngine.dll</HintPath>
+      <HintPath>..\..\Oxide\Games\Unity\Oxide.Game.HideHoldOut\Dependencies\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AFK.cs" />
-    <Compile Include="Announcer.cs" />
-    <Compile Include="CountryBlock.cs" />
-    <Compile Include="DuelsManager.cs" />
-    <Compile Include="FilterExt.cs" />
     <Compile Include="Hooks.cs" />
-    <Compile Include="Ping.cs" />
-    <Compile Include="Reserved.cs" />
-    <Compile Include="Whitelist.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
