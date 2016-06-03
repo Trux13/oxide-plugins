@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{28D59FFC-8D7E-47B0-8FF5-03BB8EA5067D}</ProjectGuid>
+    <ProjectGuid>{69615363-634F-4FB6-AACF-139391E32904}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>SpaceEngineers</RootNamespace>
     <AssemblyName>SpaceEngineers</AssemblyName>

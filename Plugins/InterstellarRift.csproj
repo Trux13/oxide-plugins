@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{28D59FFC-8D7E-47B0-8FF5-03BB8EA5067D}</ProjectGuid>
+    <ProjectGuid>{35A4394B-4539-40D6-8A34-5081CC1A25EA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>InterstellarRift</RootNamespace>
     <AssemblyName>InterstellarRift</AssemblyName>

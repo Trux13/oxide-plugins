@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{28D59FFC-8D7E-47B0-8FF5-03BB8EA5067D}</ProjectGuid>
+    <ProjectGuid>{9800368C-50A0-4422-89F9-B43ABB1D42E7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Terraria</RootNamespace>
     <AssemblyName>Terraria</AssemblyName>

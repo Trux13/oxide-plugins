@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C27EB0E1-D92C-444D-89E9-2D58141DCF3B}</ProjectGuid>
+    <ProjectGuid>{F31B985A-2C9D-4B20-AA77-B3F5DFF5DF7A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Blockstorm</RootNamespace>
     <AssemblyName>Blockstorm</AssemblyName>
